@@ -1,13 +1,14 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../css/startPage.css";
 
 function StartPage({ onSubmit }) {
 	const [name, setName] = useState("");
+	const navigate = useNavigate();
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		onSubmit(name);
+		navigate(`/gamePage/${name}`);
 	};
 
 	return (
@@ -20,10 +21,8 @@ function StartPage({ onSubmit }) {
 					value={name}
 					onChange={(e) => setName(e.target.value)}
 				/>
+				<button type="submit">PLAY</button>
 			</form>
-			<button type="submit">
-				<Link to="/gamePage">PLAY</Link>
-			</button>
 		</div>
 	);
 }

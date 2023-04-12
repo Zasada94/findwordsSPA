@@ -1,10 +1,21 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import React, { useState } from "react";
 import "./App.css";
+import { MemoryRouter as Router, Routes, Route, Link } from "react-router-dom";
+import StartPage from "./pages/startPage";
+import GamePage from "./pages/gamePage";
+// import finalPage from './Contact';
 
 function App() {
-	return <div className="App"></div>;
+	return (
+		<Router>
+			<div className="App">
+				<Routes>
+					<Route path="/" element={<StartPage />}></Route>
+					<Route path="/gamePage" element={<GamePage />}></Route>
+				</Routes>
+			</div>
+		</Router>
+	);
 }
 
 export default App;

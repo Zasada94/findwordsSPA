@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom";
+import "../css/gamePage.css";
 import React, { useState } from "react";
 
 const API = {
@@ -36,6 +37,10 @@ const GamePage = () => {
 		setShowAnswers(true);
 	};
 
+	const countCorrectAnswers = () => {
+		return selectedWords.filter((word) => API.good_words.includes(word)).length;
+	};
+
 	const renderWord = (word) => {
 		const isGood = API.good_words.includes(word);
 		const isSelected = selectedWords.includes(word);
@@ -55,6 +60,26 @@ const GamePage = () => {
 					color: isSelected && isAnswer ? (isGood ? "green" : "red") : "black",
 				}}
 			>
+				<span
+					style={{
+						display:
+							isSelected && isAnswer ? (isGood ? "block" : "none") : "none",
+						color:
+							isSelected && isAnswer ? (isGood ? "green" : "red") : "black",
+					}}
+				>
+					good
+				</span>
+				<span
+					style={{
+						display:
+							isSelected && isAnswer ? (isGood ? "none" : "block") : "none",
+						color:
+							isSelected && isAnswer ? (isGood ? "green" : "red") : "black",
+					}}
+				>
+					bad
+				</span>
 				{word}
 			</span>
 		);
@@ -65,7 +90,9 @@ const GamePage = () => {
 			<h2>{API.question}</h2>
 			<div>{API.all_words.map((word) => renderWord(word))}</div>
 			<button onClick={checkAnswers}>Sprawdź odpowiedzi</button>
-			{showAnswers}
+			{showAnswers && (
+				<p>Ilość poprawnych odpowiedzi: {countCorrectAnswers()}</p>
+			)}
 		</div>
 	);
 };

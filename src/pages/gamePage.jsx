@@ -150,9 +150,6 @@ function GamePage() {
 					CHECK ANSWERS
 				</button>
 			)}
-			{/* {showAnswers && (
-				<p>Ilość poprawnych odpowiedzi: {countCorrectAnswers()}</p>
-			)} */}
 			{showAnswers && (
 				<button className="checkAnswers" onClick={handleClick}>
 					FINISH

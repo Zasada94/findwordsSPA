@@ -75,12 +75,25 @@ function GamePage() {
 	};
 
 	const checkAnswers = () => {
-		setScore(countCorrectAnswers());
+		setGood(countCorrectAnswers());
+		setBad(countBadAnswers());
+		setScore(
+			countCorrectAnswers() * 2 - countBadAnswers() - countNotSelectedCorrect()
+		);
 		setShowAnswers(true);
 	};
 
 	const countCorrectAnswers = () => {
 		return selectedWords.filter((word) => api.good_words.includes(word)).length;
+	};
+
+	const countBadAnswers = () => {
+		return selectedWords.length - countCorrectAnswers();
+	};
+
+	const countNotSelectedCorrect = () => {
+		return api.good_words.filter((word) => !selectedWords.includes(word))
+			.length;
 	};
 
 	const handleClick = () => {
@@ -143,11 +156,10 @@ function GamePage() {
 				<p>Ilość poprawnych odpowiedzi: {countCorrectAnswers()}</p>
 			)} */}
 			{showAnswers && (
-				<button className="finish" onClick={handleClick}>
+				<button className="checkAnswers" onClick={handleClick}>
 					FINISH
 				</button>
 			)}
-			{name} {score}
 		</div>
 	);
 }

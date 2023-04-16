@@ -22,13 +22,11 @@ h2 {
 .checkAnswers {
 	color: skyblue;
 	background-color: white;
+    width: 30%;
 	padding: 2% 4%;
+    margin-top: 5%;
 	border: 0.1px solid skyblue;
 	border-radius: 4px;
-	position: absolute;
-	top: 70%;
-	left: 50%;
-	transform: translate(-50%, 0);
 	font-size: 3vmin;
 }
 
@@ -38,25 +36,9 @@ h2 {
 	border-color: black;
 }
 
-.gameContainer input {
-	/* display: none; */
+.gameContainer {
+	display: flex;
+	flex-direction: column;
+    align-items: center;
 }
 
-.finish {
-	color: skyblue;
-	background-color: white;
-	padding: 2% 4%;
-	border: 0.1px solid skyblue;
-	border-radius: 4px;
-	position: absolute;
-	top: 80%;
-	left: 50%;
-	transform: translate(-50%, 0);
-	font-size: 3vmin;
-}
-
-.finish:hover {
-	color: black;
-	background-color: skyblue;
-	border-color: black;
-}

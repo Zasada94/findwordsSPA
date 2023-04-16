@@ -2,7 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import "../css/gamePage.css";
 import React, { useState } from "react";
 
-const API = {
+const API1 = {
 	question: "select animals",
 	all_words: [
 		"hole",
@@ -21,7 +21,45 @@ const API = {
 	good_words: ["tiger", "cow"],
 };
 
+const API2 = {
+	question: "select colors",
+	all_words: [
+		"jeans",
+		"existence",
+		"ink",
+		"red",
+		"blue",
+		"yellow",
+		"laugh",
+		"behavior",
+		"expansion",
+		"white",
+		"black",
+		"cakes",
+	],
+	good_words: ["red", "blue", "yellow", "white", "black"],
+};
+
+const API3 = {
+	question: "select vehicles",
+	all_words: [
+		"belief",
+		"wire",
+		"car",
+		"bus",
+		"star",
+		"river",
+		"hat",
+		"skirt",
+		"train",
+	],
+	good_words: ["car", "bus", "train"],
+};
+
+const APIs = [API1, API2, API3];
+
 function GamePage() {
+	const [api, setApi] = useState(APIs[Math.floor(Math.random() * APIs.length)]);
 	const [selectedWords, setSelectedWords] = useState([]);
 	const [showAnswers, setShowAnswers] = useState(false);
 	const [score, setScore] = useState();
@@ -42,7 +80,7 @@ function GamePage() {
 	};
 
 	const countCorrectAnswers = () => {
-		return selectedWords.filter((word) => API.good_words.includes(word)).length;
+		return selectedWords.filter((word) => api.good_words.includes(word)).length;
 	};
 
 	const handleClick = () => {
@@ -50,7 +88,7 @@ function GamePage() {
 	};
 
 	const renderWord = (word) => {
-		const isGood = API.good_words.includes(word);
+		const isGood = api.good_words.includes(word);
 		const isSelected = selectedWords.includes(word);
 		const isAnswer = showAnswers;
 
@@ -92,9 +130,9 @@ function GamePage() {
 
 	return (
 		<div className="gameContainer">
-			<h2>{API.question}</h2>
+			<h2>{api.question}</h2>
 			<div className="gameWrapper">
-				{API.all_words.map((word) => renderWord(word))}
+				{api.all_words.map((word) => renderWord(word))}
 			</div>
 			{!showAnswers && (
 				<button onClick={checkAnswers} className="checkAnswers">

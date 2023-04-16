@@ -1,0 +1,43 @@
+.gameWrapper {
+	display: flex;
+	flex-wrap: wrap;
+	font-size: 5vmin;
+	justify-content: space-around;
+	text-align: center;
+	align-items: center;
+	border: 0.5px solid black;
+	margin: 0 1%;
+}
+
+h2 {
+	text-align: center;
+	font-size: 7vmin;
+	margin: 5% 0;
+}
+
+.item {
+	margin: 5% 5%;
+}
+
+.checkAnswers {
+	color: skyblue;
+	background-color: white;
+	padding: 2% 4%;
+	border: 0.1px solid skyblue;
+	border-radius: 4px;
+	position: absolute;
+	top: 70%;
+	left: 50%;
+	transform: translate(-50%, 0);
+	font-size: 3vmin;
+}
+
+.checkAnswers:hover {
+	color: black;
+	background-color: skyblue;
+	border-color: black;
+}
+
+.gameContainer input {
+	display: none;
+}

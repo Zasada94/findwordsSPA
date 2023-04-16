@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import "../css/gamePage.css";
 import React, { useState } from "react";
 
@@ -21,9 +21,11 @@ const API = {
 	good_words: ["tiger", "cow"],
 };
 
-const GamePage = () => {
+function GamePage() {
 	const [selectedWords, setSelectedWords] = useState([]);
 	const [showAnswers, setShowAnswers] = useState(false);
+	const [score, setScore] = useState("");
+	const navigate = useNavigate();
 
 	const handleWordClick = (word) => {
 		if (selectedWords.includes(word)) {
@@ -41,6 +43,11 @@ const GamePage = () => {
 		return selectedWords.filter((word) => API.good_words.includes(word)).length;
 	};
 
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		navigate(`/finalPage/${name}/${score}`);
+	};
+
 	const renderWord = (word) => {
 		const isGood = API.good_words.includes(word);
 		const isSelected = selectedWords.includes(word);
@@ -48,12 +55,13 @@ const GamePage = () => {
 
 		return (
 			<span
+				className="item"
 				key={word}
 				onClick={() => handleWordClick(word)}
 				style={{
-					display: "inline-block",
-					padding: "5px",
-					margin: "5px",
+					display: "block",
+					minWidth: "5%",
+					alignISelf: "center",
 					backgroundColor: isSelected ? "lightblue" : "white",
 					borderRadius: "5px",
 					cursor: "pointer",
@@ -64,8 +72,6 @@ const GamePage = () => {
 					style={{
 						display:
 							isSelected && isAnswer ? (isGood ? "block" : "none") : "none",
-						color:
-							isSelected && isAnswer ? (isGood ? "green" : "red") : "black",
 					}}
 				>
 					good
@@ -74,8 +80,6 @@ const GamePage = () => {
 					style={{
 						display:
 							isSelected && isAnswer ? (isGood ? "none" : "block") : "none",
-						color:
-							isSelected && isAnswer ? (isGood ? "green" : "red") : "black",
 					}}
 				>
 					bad
@@ -86,15 +90,34 @@ const GamePage = () => {
 	};
 
 	return (
-		<div>
+		<div className="gameContainer">
 			<h2>{API.question}</h2>
-			<div>{API.all_words.map((word) => renderWord(word))}</div>
-			<button onClick={checkAnswers}>Sprawdź odpowiedzi</button>
-			{showAnswers && (
+			<div className="gameWrapper">
+				{API.all_words.map((word) => renderWord(word))}
+			</div>
+			{!showAnswers && (
+				<button onClick={checkAnswers} className="checkAnswers">
+					CHECK ANSWERS
+				</button>
+			)}
+			{/* {showAnswers && (
 				<p>Ilość poprawnych odpowiedzi: {countCorrectAnswers()}</p>
+			)} */}
+
+			{showAnswers && (
+				<form onSubmit={handleSubmit}>
+					<input
+						type="number"
+						value={countCorrectAnswers()}
+						onChange={(e) => setScore(e.target.value)}
+					/>
+					<button className="checkAnswers" type="submit">
+						FINISH
+					</button>
+				</form>
 			)}
 		</div>
 	);
-};
+}
 
 export default GamePage;

@@ -3,6 +3,7 @@ import "./App.css";
 import { MemoryRouter as Router, Routes, Route, Link } from "react-router-dom";
 import StartPage from "./pages/startPage";
 import GamePage from "./pages/gamePage";
+import FinalPage from "./pages/finalPage";
 // import finalPage from './Contact';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
 					<Route path="/" element={<StartPage />}></Route>
 					<Route path="/gamePage/:name" element={<GamePage />}></Route>
 					<Route path="/gamePage" element={<GamePage />}></Route>
+					<Route path="/finalPage" element={<FinalPage />}></Route>
 				</Routes>
 			</div>
 		</Router>

@@ -24,8 +24,9 @@ const API = {
 function GamePage() {
 	const [selectedWords, setSelectedWords] = useState([]);
 	const [showAnswers, setShowAnswers] = useState(false);
-	const [score, setScore] = useState("");
+	const [score, setScore] = useState();
 	const navigate = useNavigate();
+	const { name } = useParams();
 
 	const handleWordClick = (word) => {
 		if (selectedWords.includes(word)) {
@@ -103,19 +104,19 @@ function GamePage() {
 			{/* {showAnswers && (
 				<p>Ilość poprawnych odpowiedzi: {countCorrectAnswers()}</p>
 			)} */}
-
 			{showAnswers && (
 				<form onSubmit={handleSubmit}>
 					<input
-						type="number"
+						type="text"
 						value={countCorrectAnswers()}
 						onChange={(e) => setScore(e.target.value)}
 					/>
-					<button className="checkAnswers" type="submit">
+					<button className="finish" type="submit">
 						FINISH
 					</button>
 				</form>
 			)}
+			{name} {score}
 		</div>
 	);
 }

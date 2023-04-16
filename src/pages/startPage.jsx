@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/startPage.css";
 
-function StartPage({ onSubmit }) {
+function StartPage() {
 	const [name, setName] = useState("");
 	const navigate = useNavigate();
 

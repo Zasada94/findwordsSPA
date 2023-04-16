@@ -75,8 +75,6 @@ function GamePage() {
 	};
 
 	const checkAnswers = () => {
-		setGood(countCorrectAnswers());
-		setBad(countBadAnswers());
 		setScore(
 			countCorrectAnswers() * 2 - countBadAnswers() - countNotSelectedCorrect()
 		);

@@ -20,6 +20,7 @@ function StartPage() {
 					placeholder="Enter your nickname here:"
 					value={name}
 					onChange={(e) => setName(e.target.value)}
+					required
 				/>
 				<button type="submit">PLAY</button>
 			</form>

@@ -37,6 +37,7 @@ function GamePage() {
 	};
 
 	const checkAnswers = () => {
+		setScore(countCorrectAnswers());
 		setShowAnswers(true);
 	};
 
@@ -44,8 +45,7 @@ function GamePage() {
 		return selectedWords.filter((word) => API.good_words.includes(word)).length;
 	};
 
-	const handleSubmit = (event) => {
-		event.preventDefault();
+	const handleClick = () => {
 		navigate(`/finalPage/${name}/${score}`);
 	};
 
@@ -105,16 +105,9 @@ function GamePage() {
 				<p>Ilość poprawnych odpowiedzi: {countCorrectAnswers()}</p>
 			)} */}
 			{showAnswers && (
-				<form onSubmit={handleSubmit}>
-					<input
-						type="text"
-						value={countCorrectAnswers()}
-						onChange={(e) => setScore(e.target.value)}
-					/>
-					<button className="finish" type="submit">
-						FINISH
-					</button>
-				</form>
+				<button className="finish" onClick={handleClick}>
+					FINISH
+				</button>
 			)}
 			{name} {score}
 		</div>
